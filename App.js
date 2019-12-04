@@ -1,16 +1,14 @@
 import React, { useState } from "react"
-import { StyleSheet, Text, View, ScrollView, FlatList } from "react-native"
+import { StyleSheet, Text, View, Alert } from "react-native"
 import { Navbar } from './src/components/Navbar'
 import { MainScreen } from "./src/screens/MainScreen"
 import { TodoScreen } from "./src/screens/TodoScreen"
 
 
 export default function App() {
-  const [todoId, setTodoId] = useState("2")
+  const [todoId, setTodoId] = useState(null)
   const [todos, setTodos] = useState([
-    { id: '1', title: 'LEARN RN' },
-    { id: '2', title: 'LEARN RN' },
-    { id: '3', title: 'LEARN RN' }
+   // { id: '1', title: 'LEARN RN' },
   ])
 
 
@@ -23,8 +21,44 @@ export default function App() {
       }
     ])
   }
-  const removeTodo = id => {
-    setTodos(prev => prev.filter(todo => todo.id !== id))
+
+  const removeTodo = (id) => {
+    let el = todos.find(t => t.id === id)
+    //const elTitle = el.title;
+
+    Alert.alert(
+      'Удаление элемента',
+      `Удалить "${el.title}"?`,
+      [
+        {
+          text: 'Отмена',
+          style: 'cancel',
+        },
+        {
+          text: 'Удалить',
+          style: 'destructive',
+          onPress: () => {
+            setTodoId(null)
+            setTodos(prev => prev.filter(todo => todo.id !== id))
+          }
+        }
+      ],
+      { cancelable: false },
+    );
+  }
+
+  const updateTodo = (id, title) => {
+
+
+    setTodos(old => old.map(todo => {
+
+
+      if (todo.id === id) {
+
+        todo.title = title
+      }
+      return todo
+    }))
   }
 
   let content = (
@@ -36,8 +70,11 @@ export default function App() {
   if (todoId) {
     const selectedTodo = todos.find(todo => todo.id === todoId)
     content = <TodoScreen
+      onRemove={removeTodo}
       goBack={() => { setTodoId(null) }}
-      todo={selectedTodo} />
+      todo={selectedTodo}
+      onSave={updateTodo}
+    />
   }
 
   return (
