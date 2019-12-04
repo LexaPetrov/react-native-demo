@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Button, TextInput, Alert } from 'react-native';
+import { THEME } from '../theme';
 
 export const AddTodo = (props) => {
     const [val, setVal] = useState(' ');
@@ -12,7 +13,6 @@ export const AddTodo = (props) => {
         } else {
             Alert.alert('нормально пиши!')
         }
-
     }
 
     return (
@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
         padding: 10,
         //borderStyle: 'solid',
         borderBottomWidth: 2,
-        borderBottomColor: '#3949ab'
+        borderBottomColor: THEME.MAIN_COLOR
     }
 })

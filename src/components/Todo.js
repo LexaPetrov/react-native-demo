@@ -8,7 +8,7 @@ export const Todo = (props) => {
 
     return (
         <TouchableOpacity activeOpacity={0.5}
-            onPress={() => console.log('pressed', props.todo.id)}
+            onPress={() => props.onOpen(props.todo.id)}
             //onLongPress={props.onRemove.bind(null, props.todo.id)}
             onLongPress={longPressHandler}
         >
