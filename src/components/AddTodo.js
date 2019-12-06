@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Button, TextInput, Alert } from 'react-native';
+import { View, StyleSheet, Button, TextInput, Alert, Keyboard } from 'react-native';
 import { THEME } from '../theme';
-import {AntDesign} from '@expo-vector-icons'
+import {AntDesign} from '@expo/vector-icons'
 
 export const AddTodo = (props) => {
     const [val, setVal] = useState(' ');
@@ -11,6 +11,7 @@ export const AddTodo = (props) => {
         if (val.trim()) {
             props.onSubmit(val)
             setVal("")
+            Keyboard.dismiss()
         } else {
             Alert.alert('нормально пиши!')
         }

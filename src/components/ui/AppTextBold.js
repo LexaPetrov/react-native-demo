@@ -11,7 +11,7 @@ export const AppTextBold = (props) => {
 
 const styles = StyleSheet.create({
     default: {
-        fontFamily: 'roboto-regular'
+        fontFamily: 'roboto-bold'
     },
 
     title: {
