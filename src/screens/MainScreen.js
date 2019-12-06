@@ -4,6 +4,8 @@ import { AddTodo } from '../components/AddTodo';
 import { Todo } from '../components/Todo';
 import { THEME } from '../theme';
 
+
+
 export const MainScreen = (props) => {
     const [devceWidth, setDeviceWidth] = useState(Dimensions.get('window').width - THEME.PADDING_HORIZONTAL * 2)
 
