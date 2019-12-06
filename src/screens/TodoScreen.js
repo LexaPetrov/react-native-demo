@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, Button, ScrollView } from 'react-native';
+import { StyleSheet, View, Button, ScrollView } from 'react-native';
 import {THEME} from '../theme'
 import { AppCard } from '../components/ui/AppCard';
 import { EditModal } from '../components/EditModal';
-
+import { AppTextBold } from './../components/ui/AppTextBold';
+import { AppButton } from './../components/ui/AppButton';
 
 export const TodoScreen = (props) => {
     const [modal, setModal] = useState(false)
@@ -21,15 +22,15 @@ export const TodoScreen = (props) => {
             onCancel={() => setModal(false)}/>
 
             <AppCard style={styles.card}>
-            <Text style={styles.title}>{props.todo.title}</Text>
+            <AppTextBold style={styles.title}>{props.todo.title}</AppTextBold>
             <Button title={'ред.'} onPress={() => setModal(true)} />
             </AppCard>
             <View style={styles.buttons}>
                 <View style={styles.button}> 
-                    <Button title={'назад'} color={THEME.GREY_COLOR} onPress={props.goBack} />
+                    <AppButton title={'назад'} color={THEME.GREY_COLOR} onPress={props.goBack} />
                 </View>
                 <View style={styles.button}> 
-                    <Button title={'удалить'} 
+                    <AppButton title={'удалить'} 
                     color={THEME.DANGER_COLOR} 
                     onPress={() => props.onRemove(props.todo.id)} />
                 </View>

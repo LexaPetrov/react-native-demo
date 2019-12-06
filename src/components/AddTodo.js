@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Button, TextInput, Alert } from 'react-native';
 import { THEME } from '../theme';
+import {AntDesign} from '@expo-vector-icons'
 
 export const AddTodo = (props) => {
     const [val, setVal] = useState(' ');
@@ -23,7 +24,10 @@ export const AddTodo = (props) => {
                 value={val}
                 placeholder={'пиши сюда'}
             />
-            <Button title={"Добавить"} onPress={pressHandler} />
+            <AntDesign.Button onPress={pressHandler} name={"pluscircleo"}>
+                    Добавить
+            </AntDesign.Button>
+           {/* <Button title={"Добавить"} onPress={pressHandler} /> */}
         </View>
     )
 }
@@ -37,7 +41,7 @@ const styles = StyleSheet.create({
         marginBottom: 15
     },
     input: {
-        width: '70%',
+        width: '60%',
         padding: 10,
         //borderStyle: 'solid',
         borderBottomWidth: 2,
