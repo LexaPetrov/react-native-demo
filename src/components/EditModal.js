@@ -4,20 +4,26 @@ import { THEME } from '../theme';
 import { AppButton } from './ui/AppButton';
 
 
-export const EditModal = (props) => {
+export const EditModal = ({visible, onCancel, value, onSave}) => {
 
-    const [title, setTitle] = useState(props.value);
+    const [title, setTitle] = useState(value);
 
     const saveHandler = () => {
         if (title.trim().length < 3) {
             Alert.alert('Ошибка', `Минимальная длина - 3 символа.
             Сейчас ${title.trim().length} символ(а)`)
         } else {
-            props.onSave(title)
+            onSave(title)
         }
     }
+
+
+    const cancelHandler = () => {
+        setTitle(value)
+        onCancel()
+    }
     return (
-        <Modal visible={props.visible} animationType={'slide'}>
+        <Modal visible={visible} animationType={'slide'}>
             <View style={styles.wrap}>
                 <TextInput style={styles.input} placeholder={'пиши сюда'}
                 value={title}
@@ -26,7 +32,7 @@ export const EditModal = (props) => {
                 />
                 <View style={styles.buttons}>
                 <AppButton color={THEME.DANGER_COLOR} 
-                onPress={props.onCancel}> отменить </AppButton>
+                onPress={cancelHandler}> отменить </AppButton>
                 <AppButton onPress={saveHandler}> сохранить </AppButton>
                 </View>
                

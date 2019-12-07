@@ -1,12 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, FlatList, Image, Dimensions } from 'react-native';
 import { AddTodo } from '../components/AddTodo';
 import { Todo } from '../components/Todo';
 import { THEME } from '../theme';
+import { TodoContext } from '../context/todo/todoContext';
+import { ScreenContext } from '../context/screen/screenContext';
 
 
 
-export const MainScreen = (props) => {
+export const MainScreen = () => {
+    const { addTodo, todos, removeTodo } = useContext(TodoContext)
+    const {changeScreen} = useContext(ScreenContext)
     const [devceWidth, setDeviceWidth] = useState(Dimensions.get('window').width - THEME.PADDING_HORIZONTAL * 2)
 
 
@@ -20,33 +24,33 @@ export const MainScreen = (props) => {
             Dimensions.removeEventListener('change', update)
         }
     })
-    
+
 
     let content = (
         <View style={{ width: devceWidth }}>
             <FlatList
-            keyExtractor={item => item.id.toString()}
-            data={props.todos}
-            renderItem={({ item }) => (
-                <Todo todo={item} onRemove={props.removeTodo} onOpen={props.openTodo} />
-            )}
-        />
+                keyExtractor={item => item.id.toString()}
+                data={todos}
+                renderItem={({ item }) => (
+                    <Todo todo={item} onRemove={removeTodo} onOpen={changeScreen} />
+                )}
+            />
         </View>
     )
 
-    if (props.todos.length === 0) {
+    if (todos.length === 0) {
         content =
             <View style={styles.imgWrap}>
-                <Image style={styles.image} 
-                source={require('../../assets/no-items.png')}/>
-                 {/* <Image style={styles.image} 
+                <Image style={styles.image}
+                    source={require('../../assets/no-items.png')} />
+                {/* <Image style={styles.image} 
                 source={{uri: 'https://st2.depositphotos.com/2038163/11363/v/950/depositphotos_113637050-stock-illustration-moderm-minimalis-initial-logo-rn.jpg'}}/> */}
             </View>
     }
 
     return (
         <View>
-            <AddTodo onSubmit={props.addTodo} />
+            <AddTodo onSubmit={addTodo} />
             {content}
         </View>
     )
@@ -55,7 +59,7 @@ export const MainScreen = (props) => {
 
 const styles = StyleSheet.create({
     imgWrap: {
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'center',
         padding: 10,
         height: 300
