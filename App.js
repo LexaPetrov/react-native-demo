@@ -4,8 +4,8 @@ import * as Font from 'expo-font'
 import { AppLoading } from 'expo'
 
 import { TodoState } from './src/context/todo/TodoState'
+import { ScreenState } from './src/context/screen/ScreenState'
 import { MainLayout } from './src/MainLayout'
-import { ScreenState } from './src/context/screen/ScreenState';
 
 async function loadApplication() {
   await Font.loadAsync({
