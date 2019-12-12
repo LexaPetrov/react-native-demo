@@ -28,7 +28,7 @@ export const TodoState = ({ children }) => {
     clearError()
     try {
       const data = await Http.post(
-        'https://rn-todo-app-a280c.firebaseio.com/todos.json',
+        'https://rn-todo-app-[yourDataBase].firebaseio.com/todos.json',
         { title }
       )
       dispatch({ type: ADD_TODO, title, id: data.name })
@@ -53,7 +53,7 @@ export const TodoState = ({ children }) => {
           onPress: async () => {
             changeScreen(null)
             await Http.delete(
-              `https://rn-todo-app-a280c.firebaseio.com/todos/${id}.json`
+              `https://rn-todo-app-[yourDataBase].firebaseio.com/todos/${id}.json`
             )
             dispatch({ type: REMOVE_TODO, id })
           }
@@ -68,7 +68,7 @@ export const TodoState = ({ children }) => {
     clearError()
     try {
       const data = await Http.get(
-        'https://rn-todo-app-a280c.firebaseio.com/todos.json'
+        'https://rn-todo-app-[yourDataBase].firebaseio.com/todos.json'
       )
       const todos = Object.keys(data).map(key => ({ ...data[key], id: key }))
       dispatch({ type: FETCH_TODOS, todos })
@@ -84,7 +84,7 @@ export const TodoState = ({ children }) => {
     clearError()
     try {
       await Http.patch(
-        `https://rn-todo-app-a280c.firebaseio.com/todos/${id}.json`
+        `https://rn-todo-app-[yourDataBase].firebaseio.com/todos/${id}.json`
       )
       dispatch({ type: UPDATE_TODO, id, title })
     } catch (e) {
